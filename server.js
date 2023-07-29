@@ -1,18 +1,7 @@
 const { disconnect } = require('process');
-const { readFileSync } = require("fs");
-const { createServer } = require("https");
 const { Server } = require('socket.io')
 
-const httpsServer = createServer({
-  key: readFileSync("./ssl/ssl.key"),
-  cert: readFileSync("./ssl/ssl.crt")
-  },(req,res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-  res.setHeader('Access-Control-Max-Age', 60*60*24*30);
-});
-
-const io = new Server(httpsServer, {
+const io = new Server({
   cors: {
     origin: "*:*",
     methods: "*"
